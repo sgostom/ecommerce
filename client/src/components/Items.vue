@@ -1,11 +1,9 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-
-
     <form class="w-full max-w-sm">
       <br>
-      <label for="search">Search</label>
+      <label for="search">Search products:</label>
       <div class="flex items-center border-b border-b-2 border-teal-500 py-2">
         <br>
         <input
@@ -17,19 +15,25 @@
         >
       </div>
     </form>
-    <ul>
-      <li v-for="item in results" :key="item.id">
-        <p>{{item.general.name}}</p>
-      </li>
-    </ul>
+    <br>
+
+    <Product class="inline-block p-4"
+      v-for="item in results"
+      :key="item.id"
+      :itemId="item.id"
+      :imageUrl="item.images.primary.large"
+      :description="item.general.description"
+      :name="item.general.name"
+    />
+
   </div>
 </template>
 
 <script>
-import debounce from 'lodash.debounce';
-import axios from 'axios';
-const API =  'http://localhost:3005/products';
-
+import Product from './Product';
+import debounce from "lodash.debounce";
+import axios from "axios";
+const API = "http://localhost:3005/products";
 
 export default {
   name: "Items",
@@ -38,21 +42,36 @@ export default {
   },
   data() {
     return {
-      searchValue: '',
-      results: [],
+      searchValue: "",
+      results: []
     };
   },
+  created(){
+      axios
+        .get(`${API}?_limit=12`)
+        .then(response => {
+          console.log(response.data);
+          this.results = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+  },
   methods: {
-    handleInput: debounce(function () {
-      axios.get(API)
-      .then((response) => {
-        console.log(response.data);
-        this.results = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    },500)
+    handleInput: debounce(function() {
+      axios
+        .get(`${API}?q=${this.searchValue}`)
+        .then(response => {
+          console.log(response.data);
+          this.results = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, 500)
+  },
+  components: {
+    Product,
   },
 };
 </script>

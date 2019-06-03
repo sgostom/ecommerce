@@ -14,7 +14,7 @@
           >
           <div class="text-center sm:text-left sm:flex-grow">
             <div class="mb-4">
-              <p class="text-xl leading-tight">Jane Doe</p>
+              <p class="text-xl leading-tight">Janie Doe</p>
               <p class="text-sm leading-tight text-grey-dark">Software Developer at SpongeBob LLC.</p>
             </div>
             <div class="flex flex-wrap">
