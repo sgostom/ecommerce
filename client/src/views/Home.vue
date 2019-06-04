@@ -2,7 +2,6 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <Items msg="Welcome to Your  eCommerce Vue.js App"/>
-
   </div>
 </template>
 
@@ -22,5 +21,6 @@ export default {
 <style scoped lang="scss">
 img {
   display: inline;
+  padding-bottom: 30px;
 }
 </style>
