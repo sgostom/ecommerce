@@ -1,7 +1,5 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-
     <div class="container mx-auto py-10">
       <div
         class="border m-6 rounded-lg bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden"
@@ -14,8 +12,8 @@
           >
           <div class="text-center sm:text-left sm:flex-grow">
             <div class="mb-4">
-              <p class="text-xl leading-tight">Janie Doe</p>
-              <p class="text-sm leading-tight text-grey-dark">Software Developer at SpongeBob LLC.</p>
+              <p class="text-xl leading-tight">Hi!</p>
+
             </div>
             <div class="flex flex-wrap">
               <button
