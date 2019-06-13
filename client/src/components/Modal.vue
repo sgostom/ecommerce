@@ -11,8 +11,9 @@
             alt
           >
           <div class="text-center sm:text-left sm:flex-grow mb-6">
-              <p class="text-xl leading-tight mb-4">{{item.general.name}}</p>
-              <div class="flex flex-warp mb-4">
+              <p class="text-xl leading-tight mb-2">{{item.general.name}}</p>
+              <p class="text-l leading-tight mb-4">{{item.brand.name}}</p>
+              <div class="flex flex-warp mb-6">
                 <span
                   class="inline-block bg-gray-200 rounded-full px-3 py-2 text-sm font-semibold text-gray-700 mr-2"
                 >#{{item.id}}</span>
@@ -34,13 +35,10 @@ export default {
   name: "Modal",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
       itemDescription: null
     };
   },
   props: ["item"],
-
-  mounted() {},
 
   methods: {
     pass_to_cart: function(e, single_product_object) {

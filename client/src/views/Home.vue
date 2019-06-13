@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <Items msg="Welcome to Your  eCommerce Vue.js App"/>
+    <Items />
   </div>
 </template>
 
@@ -12,8 +12,8 @@ import Items from "@/components/Items.vue";
 export default {
   name: "home",
   components: {
-    Items
-  }
+    Items,
+  },
 };
 </script>
 

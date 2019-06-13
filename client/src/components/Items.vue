@@ -54,9 +54,6 @@ const API = "http://localhost:3005/products";
 
 export default {
   name: "Items",
-  props: {
-    msg: String
-  },
   data() {
     return {
       searchValue: "",

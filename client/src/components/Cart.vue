@@ -1,6 +1,7 @@
 <template>
   <div class="cart-side-bar">
     <label class="italic" for="search">Your cart:</label>
+
     <div class="container mx-auto" v-for="(item, index) in inCart" :key="index">
       <div
         class="border m-6 rounded-lg bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden"
@@ -55,10 +56,9 @@ export default {
   props: ["products"],
   data: function() {
     return {
-      inCart: [],
+      inCart: []
     };
   },
-  computed: {},
 
   methods: {
     updateProductQuantity() {
@@ -89,12 +89,11 @@ export default {
   },
 
   mounted() {
-
-    if(localStorage.getItem('cart')) {
+    if (localStorage.getItem("cart")) {
       try {
-        this.inCart = JSON.parse(localStorage.getItem('cart'));
-      } catch(e) {
-        localStorage.removeItem('cart');
+        this.inCart = JSON.parse(localStorage.getItem("cart"));
+      } catch (e) {
+        localStorage.removeItem("cart");
       }
     }
 
@@ -113,7 +112,7 @@ export default {
       }
 
       if (found) {
-        var new_value = parseInt(this.inCart[index].quantity) + 1;
+        let new_value = parseInt(this.inCart[index].quantity) + 1;
         this.$set(this.inCart[index], "quantity", new_value);
         this.updateProductQuantity();
       } else {
