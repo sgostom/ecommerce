@@ -1,5 +1,6 @@
 <template>
   <div class="cart-side-bar">
+    <label class="italic" for="search">Your cart:</label>
     <div class="container mx-auto" v-for="(item, index) in inCart" :key="index">
       <div
         class="border m-6 rounded-lg bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden"
@@ -60,16 +61,16 @@ export default {
   computed: {},
 
   methods: {
-    updateProductQuantity: function() {
+    updateProductQuantity() {
       this.$forceUpdate();
       this.saveCart();
     },
-    removeFromCart: function(id) {
+    removeFromCart(id) {
       let index = this.findIndexById(id);
       this.inCart.splice(index, 1);
       this.saveCart();
     },
-    findIndexById: function(id) {
+    findIndexById(id) {
       let products = this.inCart;
       let index = "";
 

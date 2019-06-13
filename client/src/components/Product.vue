@@ -9,6 +9,7 @@
     </div>
     <button
       @click="pass_to_cart($event,item)"
+      v-on:click.stop
       class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
     >Add to cart</button>
     <div class="px-6 py-4"></div>

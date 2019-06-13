@@ -2,6 +2,7 @@
 <template>
   <div>
     <form class="w-full max-w-sm">
+        <Modal v-if="modalOpen" @close-modal="modalOpen = false" :item="modalItem"/>
       <label class="italic" for="search">Search products:</label>
       <div class="flex items-center border-b border-b-2 border-teal-500 py-2">
         <input
@@ -16,7 +17,8 @@
 
     <div class="flex flex-wrap overflow-hidden">
       <div class="my-2 px-2 w-full overflow-hidden xl:w-2/3">
-        <Product class="inline-block p-4" v-for="item in results" :key="item.id" :item="item"/>
+        <Product class="inline-block p-4" v-for="item in results" :key="item.id" :item="item"
+        @click.native="handleModalOpen(item)"/>
         <paginate
           :page-count="lastPage"
           :page-range="3"
@@ -42,6 +44,7 @@
 <script>
 import Product from "./Product";
 import Cart from "./Cart";
+import Modal from "./Modal";
 import debounce from "lodash.debounce";
 import axios from "axios";
 import { constants } from "fs";
@@ -62,7 +65,9 @@ export default {
       links: [],
       linkString: "",
       lastPage: 0,
-      paginationPage: 1
+      paginationPage: 1,
+      modalOpen: false,
+      modalItem: null,
     };
   },
   mounted() {
@@ -75,11 +80,15 @@ export default {
       this.getPosts();
     }, 500),
 
-    getPosts: function() {
+    handleModalOpen(item) {
+      this.modalOpen = true;
+      this.modalItem = item;
+    },
+
+    getPosts() {
       axios
-        .get(`${API}?q=${this.searchValue}&_page=${this.paginationPage}`)
+        .get(`${API}?q=${this.searchValue}&_limit=12&_page=${this.paginationPage}`)
         .then(response => {
-          console.log(response.headers.link);
           this.results = response.data;
           this.linkString = response.headers.link;
           this.setLastPage();
@@ -89,7 +98,7 @@ export default {
         });
     },
 
-    setLastPage: function() {
+    setLastPage() {
       let iStart = 0;
       let iStop = 0;
 
@@ -104,8 +113,7 @@ export default {
       this.lastPage = Number(this.linkString.slice(iStart, iStop));
     },
 
-    clickCallback: function(pageNum) {
-      console.log(pageNum);
+    clickCallback(pageNum) {
       this.paginationPage = pageNum;
       this.getPosts();
     }
@@ -113,6 +121,7 @@ export default {
   components: {
     Product,
     Cart,
+    Modal,
     Paginate
   }
 };
@@ -123,7 +132,7 @@ form {
   margin: 0 auto;
 }
 .pagination {
-  margin: 15px;
+  margin: 1rem;
   list-style: none;
 }
 .none {
@@ -133,9 +142,10 @@ form {
 .page-item {
   box-sizing: border-box;
   display: inline-block;
+      margin: 0.5rem 0;
 
   a {
-    margin: 2px;
+    margin: 0.25rem;
     padding: 0.5rem 1rem;
     background-color: #e6e6e6;
     border: 1px solid #b9b9b9;
