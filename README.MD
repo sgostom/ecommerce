@@ -39,12 +39,3 @@ npm start
 ```
 
 Server address will appear in the terminal.
-
-## How to deliver your solution
-
-- Use whatever repository hosting you want.
-- Compress the task in a `.zip` or a `.bundle` file. We want to have all the git history. Easiest way is to run:
-
-```bash
-git bundle create staples-frontend-task.bundle --all
-```
